@@ -13,14 +13,21 @@ import java.util.Optional;
 @RequestMapping("/api/v1/movies")
 public class MovieController {
 
+    // Autowired annotation is used for automatic injection of MovieService bean.
     @Autowired
     private MovieService movieService;
+
+    // Handles HTTP GET requests to retrieve all movies.
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies(){
-        return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK) ;
+        // Returns a ResponseEntity with a list of movies and HTTP status OK.
+        return new ResponseEntity<List<Movie>>(movieService.allMovies(), HttpStatus.OK);
     }
+
+    // Handles HTTP GET requests to retrieve a single movie based on its IMDB ID.
     @GetMapping("/{imdbId}")
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId){
+        // Returns a ResponseEntity with an Optional containing a single movie and HTTP status OK.
         return new ResponseEntity<Optional<Movie>>(movieService.singleMovie(imdbId), HttpStatus.OK);
     }
 }
